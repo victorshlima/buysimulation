@@ -9,6 +9,19 @@ private double preço;
 private int quantidade;
 private double total;
 
+
+    Address DeliveryAddress;
+
+    Address BillingAAddress;
+
+    public Address getDeliveryAddress() {
+        return DeliveryAddress;
+    }
+
+    public void setDeliveryAddress(Address deliveryAddress) {
+        DeliveryAddress = deliveryAddress;
+    }
+
     public double getPreço() {
         return preço;
     }
@@ -39,5 +52,8 @@ private double total;
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+
     }
+
+
 }

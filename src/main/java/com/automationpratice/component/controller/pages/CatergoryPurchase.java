@@ -1,15 +1,13 @@
 package com.automationpratice.component.controller.pages;
 
 
-
-import com.automationpratice.component.controller.com.automationpratice.component.DriverInstance.Util;
+import com.automationpratice.component.controller.WebDriverInstance.Util;
 import com.automationpratice.component.controller.domain.Pedido;
 import com.automationpratice.component.controller.enumeration.ByPath;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.Random;
 
 
 // fazer um for e selecionar por titulo
@@ -25,47 +23,35 @@ public class CatergoryPurchase {
     public By woman = By.xpath("/html/body/div/div[1]/header/div[3]/div/div/div[6]/ul/li[1]/a");
     public By urlTshirts = By.xpath("/html/body/div/div[1]/header/div[3]/div/div/div[6]/ul/li[3]/a");
 
-
     public By SELECT_FIRST_ITEM_CART = By.xpath("/html/body/div/div[2]/div/div[3]/div[2]/ul/li");
     public By SELECT_FIRST_ITEM_CART_1 = By.xpath("/html/body/div/div[2]/div/div[3]/div[2]/ul/li/div");
 
     public By ADD_FIRST_ITEM_CART = By.xpath("//*[@id='add_to_cart']");
-
 
     public By PROCEED_CHECKOUT = By.xpath  ("//*[@class='btn btn-default button button-medium']");
 
     public By ITEM_PRICE = By.xpath  ("/html/body/div/div[2]/div/div[3]/div/div/div/div[4]/form/div/div[1]/div[1]/p[1]/span");
     public By ITEM_QUANT = By.xpath  ("/html/body/div/div[2]/div/div[3]/div/div/div/div[4]/form/div/div[2]/p[1]/input");
 
-
     public By ITEM_SIZE = By.xpath  ("/html/body/div/div[2]/div/div[3]/div/div/div/div[4]/form/div/div[2]/div/fieldset[1]/div/div/select/option");
     public By ITEM_COLOR = By.xpath  ("/html/body/div/div[2]/div/div[3]/div/div/div/div[4]/form/div/div[2]/div/fieldset[2]/div/ul/li[1]/a");
 
-
     public By PROCEED_CHECKOUT_2 = By.xpath  ("/html/body/div/div[2]/div/div[3]/div/p[2]/a[1]");
-
-
 
     public By CREATE_ACCOUNT = By.xpath  ("//*[@id=\"SubmitCreate\"]");
     public By EMAIL_ADRESS = By.xpath  ("/html/body/div/div[2]/div/div[3]/div/div/div[1]/form/div/div[2]/input");
-    public String EMAIL_ADRESS_TEST = "test0000000000001@testgmail.com";
-
-
-
-
+    public String EMAIL_ADRESS_TEST = "test_user" + new Random().nextInt(999999999) + "@testgmail.com";
 
     public By CUSTUMER_FIRST_NAME = By.xpath("//*[@id='customer_firstname']");
     public By CUSTUMER_LAST_NAME = By.xpath("//*[@id='customer_lastname']");
     public By email = By.xpath("//*[@id='email']");
     public By passwd = By.xpath("//*[@id='passwd']");
 
-
-
-
     public By FIRST_NAME = By.xpath("//*[@id='firstname']");
     public By LAST_NAME = By.xpath("//*[@id='lastname']");
     public By COMPANY = By.xpath("//*[@id='company']");
     public By ADDRESS = By.xpath("//*[@id='address1']");
+    public By ADDRESS_Line2 = By.xpath("//*[@id='address2']");
     public By CITY = By.xpath("//*[@id='city']");
 
     public By POSTAL_CODE = By.xpath("//*[@id='postcode']");
@@ -75,8 +61,40 @@ public class CatergoryPurchase {
     public By PHONE_MOBILE = By.xpath("//*[@id='phone_mobile']");
     public By ALIAS = By.xpath("//*[@id='alias']");
 
+    public By STATE = By.xpath("//*[@id='id_state']/option");
 
-    public By STATE = By.xpath("//*[@id='id_state']");
+    public By COUNTRY = By.xpath("//*[@id='id_country']/option");
+
+    public By DAY = By.xpath("//*[@id='days']/option");
+    public By MONTH = By.xpath("//*[@id='months']/option");
+    public By YEAR = By.xpath("//*[@id='years']/option");
+
+
+    public By UNIFORM_NEWSLETTER = By.xpath("//*[@id='uniform-newsletter']");
+    public By UNIFORM_OPTIN_OFFERS = By.xpath("//*[@id='uniform-optin']");
+
+    public By TITLE = By.xpath("//*[@id='id_gender2']");
+
+    public By CONFIRM = By.xpath("//*[@id='cgv']");
+
+    public By YOUR_DELIVERY_ADDRESS = By.xpath("//*[@id='address_delivery']/li");
+
+    public By YOUR_BILLING_ADDRESS = By.xpath("//*[@id='id_gender2']");
+
+    public By CONFIRM_ADDRESS_PRO_CHECK = By.xpath("//*[@id='center_column']/form/p/button");
+
+    public By SELECIONA_TIPO_PAGAMENTO = By.xpath("//*[@id='center_column']/form/p/button");
+
+    public By CARD_NAVIGATION = By.xpath("//*[@id='cart_navigation']");
+
+    public By REGISTER = By.xpath("//*[@id='submitAccount']");
+
+    public By SHIPPING_PRO_CHECK = By.xpath("//*[@id='form']/p/button");
+
+    public By PAY_BUY_WIRE = By.xpath("//*[@id='HOOK_PAYMENT']/div[1]/div/p/a");
+
+    public By I_CONFIRM_ORDER = By.xpath("//*[@id='cart_navigation']/button");
+
 
 
 
@@ -104,6 +122,7 @@ public class CatergoryPurchase {
 
         return true;
     }
+
 
     public Boolean validaItem(By path) {
 
@@ -137,25 +156,32 @@ public class CatergoryPurchase {
         return this.util.InsertValue(path,value);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     public CatergoryPurchase(WebDriver webDriver) {
 
         this.webDriver = webDriver;
         this.util =   new Util(webDriver);
     }
 
+
+    public By getYOUR_DELIVERY_ADDRESS() {
+        return YOUR_DELIVERY_ADDRESS;
+    }
+
+    public By getYOUR_BILLING_ADDRESS() {
+        return YOUR_BILLING_ADDRESS;
+    }
+
+    public By getCONFIRM() {
+        return CONFIRM;
+    }
+
+    public By getSELECIONA_TIPO_PAGAMENTO() {
+        return SELECIONA_TIPO_PAGAMENTO;
+    }
+
+    public By getCARD_NAVIGATION() {
+        return CARD_NAVIGATION;
+    }
 
 
 
@@ -164,7 +190,21 @@ public class CatergoryPurchase {
     }
 
 
+    public By getCOUNTRY() {
+        return COUNTRY;
+    }
 
+    public By getDAY() {
+        return DAY;
+    }
+
+    public By getMONTH() {
+        return MONTH;
+    }
+
+    public By getYEAR() {
+        return YEAR;
+    }
 
     public By getCUSTUMER_FIRST_NAME() {
         return CUSTUMER_FIRST_NAME;
@@ -262,7 +302,42 @@ public class CatergoryPurchase {
 
     public By getUrlTshirts() {        return urlTshirts;    }
 
+    public By getADDRESS_Line2() {
+        return ADDRESS_Line2;
+    }
+
+    public By getREGISTER() {
+        return REGISTER;
+    }
+
+    public By getTITLE() {
+        return TITLE;
+    }
     public By getWoman() {
         return woman;
+    }
+
+    public By getUNIFORM_NEWSLETTER() {
+        return UNIFORM_NEWSLETTER;
+    }
+
+    public By getUNIFORM_OPTIN_OFFERS() {
+        return UNIFORM_OPTIN_OFFERS;
+    }
+
+    public By getCONFIRM_ADDRESS_PRO_CHECK() {
+        return CONFIRM_ADDRESS_PRO_CHECK;
+    }
+
+    public By getSHIPPING_PRO_CHECK() {
+        return SHIPPING_PRO_CHECK;
+    }
+
+    public By getPAY_BUY_WIRE() {
+        return PAY_BUY_WIRE;
+    }
+
+    public By getI_CONFIRM_ORDER() {
+        return I_CONFIRM_ORDER;
     }
 }

@@ -1,33 +1,22 @@
-package com.automationpratice.component.controller.com.automationpratice.component.DriverInstance;
+package com.automationpratice.component.controller.WebDriverInstance;
 
-import com.automationpratice.component.controller.enumeration.ByPath;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.CapabilityType;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.util.HashMap;
 import java.util.List;
 
 public class Util {
 
     WebDriver webDriver;
 
-
-
     public Util(WebDriver webDriver) {
 
         this.webDriver = webDriver;
 
     }
-
 
     public Boolean ClickByPath (By xpath){
 
@@ -53,25 +42,17 @@ public class Util {
            List< WebElement> elements = webDriver.findElements(xpath);
           String  value="";
             for (WebElement e:elements) {
-
-
-
                 //QUANDO NÂO ECONTRA CAI NO CAtch
-
                 try {
                    // String valueAtt = e.getAttribute(atribute);
                   //  String text = e.getText();
-
                     if( e.getAttribute(atribute).equals("true")) {
                         return   value =   e.getText();
                     }else {
                         value = "";
                     }
-
                 } catch  (Exception ex){
-
                     ex.getMessage();
-
                 }
                  }
             return value;
@@ -93,10 +74,9 @@ public class Util {
                 //QUANDO NÂO ECONTRA CAI NO CAtch
                 try {
 
-                    if( e.getText().toUpperCase().equals(value)) {
+                    if (e.getText().trim().equals(value)) {
                         e.click();
-                    }else {
-                        return false;
+                        return true;
                     }
 
                 } catch  (Exception ex){

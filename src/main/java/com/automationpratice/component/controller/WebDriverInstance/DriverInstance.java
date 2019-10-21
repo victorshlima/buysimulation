@@ -1,4 +1,4 @@
-package com.automationpratice.component.controller.com.automationpratice.component.DriverInstance;
+package com.automationpratice.component.controller.WebDriverInstance;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
