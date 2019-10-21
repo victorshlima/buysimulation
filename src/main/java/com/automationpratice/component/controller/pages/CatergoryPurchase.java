@@ -3,6 +3,7 @@ package com.automationpratice.component.controller.pages;
 
 
 import com.automationpratice.component.controller.com.automationpratice.component.DriverInstance.Util;
+import com.automationpratice.component.controller.domain.Pedido;
 import com.automationpratice.component.controller.enumeration.ByPath;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -19,7 +20,7 @@ public class CatergoryPurchase {
     ByPath x;
     WebDriver webDriver;
     Util util;
-
+    Pedido ped = new Pedido();
 
     public By woman = By.xpath("/html/body/div/div[1]/header/div[3]/div/div/div[6]/ul/li[1]/a");
     public By urlTshirts = By.xpath("/html/body/div/div[1]/header/div[3]/div/div/div[6]/ul/li[3]/a");
@@ -33,19 +34,117 @@ public class CatergoryPurchase {
 
     public By PROCEED_CHECKOUT = By.xpath  ("//*[@class='btn btn-default button button-medium']");
 
+    public By ITEM_PRICE = By.xpath  ("/html/body/div/div[2]/div/div[3]/div/div/div/div[4]/form/div/div[1]/div[1]/p[1]/span");
+    public By ITEM_QUANT = By.xpath  ("/html/body/div/div[2]/div/div[3]/div/div/div/div[4]/form/div/div[2]/p[1]/input");
+
+
+    public By ITEM_SIZE = By.xpath  ("/html/body/div/div[2]/div/div[3]/div/div/div/div[4]/form/div/div[2]/div/fieldset[1]/div/div/select/option");
+    public By ITEM_COLOR = By.xpath  ("/html/body/div/div[2]/div/div[3]/div/div/div/div[4]/form/div/div[2]/div/fieldset[2]/div/ul/li[1]/a");
+
+
+    public By PROCEED_CHECKOUT_2 = By.xpath  ("/html/body/div/div[2]/div/div[3]/div/p[2]/a[1]");
+
+
+
+    public By CREATE_ACCOUNT = By.xpath  ("//*[@id=\"SubmitCreate\"]");
+    public By EMAIL_ADRESS = By.xpath  ("/html/body/div/div[2]/div/div[3]/div/div/div[1]/form/div/div[2]/input");
+    public String EMAIL_ADRESS_TEST = "test0000000000001@testgmail.com";
+
+
+
+
+
+    public By CUSTUMER_FIRST_NAME = By.xpath("//*[@id='customer_firstname']");
+    public By CUSTUMER_LAST_NAME = By.xpath("//*[@id='customer_lastname']");
+    public By email = By.xpath("//*[@id='email']");
+    public By passwd = By.xpath("//*[@id='passwd']");
+
+
+
+
+    public By FIRST_NAME = By.xpath("//*[@id='firstname']");
+    public By LAST_NAME = By.xpath("//*[@id='lastname']");
+    public By COMPANY = By.xpath("//*[@id='company']");
+    public By ADDRESS = By.xpath("//*[@id='address1']");
+    public By CITY = By.xpath("//*[@id='city']");
+
+    public By POSTAL_CODE = By.xpath("//*[@id='postcode']");
+
+    public By OTHER = By.xpath("//*[@id='other']");
+    public By PHONE = By.xpath("//*[@id='phone']");
+    public By PHONE_MOBILE = By.xpath("//*[@id='phone_mobile']");
+    public By ALIAS = By.xpath("//*[@id='alias']");
+
+
+    public By STATE = By.xpath("//*[@id='id_state']");
+
+
+
+
+
+
+
 
     public Boolean CatergoryPurchase(By path) {
-
         this.util.ClickByPath(path);
          return true;
     }
 
-    public Boolean AddItemCart(By path) {
-
+        public Boolean AddItemCart(By path) {
         this.util.ClickByPath(path);
+        return true;
+    }
+
+
+
+    public Boolean SelectItem(By path, String value) {
+
+        this.util.selecItemListBox(path, value );
+
 
         return true;
     }
+
+    public Boolean validaItem(By path) {
+
+     String preco =   this.util.getTextElement(path);
+
+
+     ped.setPreço(Double.parseDouble(preco.substring(1)));
+
+     return true;
+    }
+
+    public Boolean validaList(By path, String atribute) {
+
+        String values =   this.util.getTextElements(path, atribute );
+        return true;
+    }
+
+
+
+
+    public Boolean validaItem2(By path, String atribute) {
+
+        String value =   this.util.getAtribute(path,atribute);
+        return true;
+    }
+
+
+    public Boolean InsertValue(By path, String value) {
+
+
+        return this.util.InsertValue(path,value);
+    }
+
+
+
+
+
+
+
+
+
 
 
 
@@ -56,6 +155,96 @@ public class CatergoryPurchase {
         this.webDriver = webDriver;
         this.util =   new Util(webDriver);
     }
+
+
+
+
+    public String getEMAIL_ADRESS_TEST() {
+        return EMAIL_ADRESS_TEST;
+    }
+
+
+
+
+    public By getCUSTUMER_FIRST_NAME() {
+        return CUSTUMER_FIRST_NAME;
+    }
+
+    public By getCUSTUMER_LAST_NAME() {
+        return CUSTUMER_LAST_NAME;
+    }
+
+    public By getEmail() {
+        return email;
+    }
+
+    public By getPasswd() {
+        return passwd;
+    }
+
+    public By getPROCEED_CHECKOUT_2() {
+        return PROCEED_CHECKOUT_2;
+    }
+
+    public By getCREATE_ACCOUNT() {
+        return CREATE_ACCOUNT;
+    }
+
+    public By getEMAIL_ADRESS() {
+        return EMAIL_ADRESS;
+    }
+
+    public By getFIRST_NAME() {
+        return FIRST_NAME;
+    }
+
+    public By getSTATE() {
+        return STATE;
+    }
+
+    public By getLAST_NAME() {
+        return LAST_NAME;
+    }
+
+    public By getCOMPANY() {
+        return COMPANY;
+    }
+
+    public By getADDRESS() {
+        return ADDRESS;
+    }
+
+    public By getCITY() {
+        return CITY;
+    }
+
+    public By getOTHER() {
+        return OTHER;
+    }
+
+    public By getPHONE() {
+        return PHONE;
+    }
+
+    public By getPHONE_MOBILE() {
+        return PHONE_MOBILE;
+    }
+
+    public By getALIAS() {
+        return ALIAS;
+    }
+
+    public By getPOSTAL_CODE() {
+        return POSTAL_CODE;
+    }
+
+    public By getITEM_PRICE() {        return ITEM_PRICE;    }
+
+    public By getITEM_QUANT() {        return ITEM_QUANT;    }
+
+    public By getITEM_SIZE() {        return ITEM_SIZE;    }
+
+    public By getITEM_COLOR() {        return ITEM_COLOR;    }
 
     public By getSELECT_FIRST_ITEM_CART() {
         return SELECT_FIRST_ITEM_CART;
@@ -76,6 +265,4 @@ public class CatergoryPurchase {
     public By getWoman() {
         return woman;
     }
-
-
 }
