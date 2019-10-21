@@ -96,13 +96,6 @@ public class CatergoryPurchase {
     public By I_CONFIRM_ORDER = By.xpath("//*[@id='cart_navigation']/button");
 
 
-
-
-
-
-
-
-
     public Boolean CatergoryPurchase(By path) {
         this.util.ClickByPath(path);
          return true;
@@ -140,9 +133,6 @@ public class CatergoryPurchase {
         return true;
     }
 
-
-
-
     public Boolean validaItem2(By path, String atribute) {
 
         String value =   this.util.getAtribute(path,atribute);
@@ -161,7 +151,6 @@ public class CatergoryPurchase {
         this.webDriver = webDriver;
         this.util =   new Util(webDriver);
     }
-
 
     public By getYOUR_DELIVERY_ADDRESS() {
         return YOUR_DELIVERY_ADDRESS;
@@ -183,12 +172,9 @@ public class CatergoryPurchase {
         return CARD_NAVIGATION;
     }
 
-
-
     public String getEMAIL_ADRESS_TEST() {
         return EMAIL_ADRESS_TEST;
     }
-
 
     public By getCOUNTRY() {
         return COUNTRY;
