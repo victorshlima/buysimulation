@@ -2,12 +2,12 @@ package com.automationpratice;
 
 import com.automationpratice.component.controller.WebDriverInstance.DriverInstance;
 import com.automationpratice.component.controller.WebDriverInstance.Utilv2;
-import com.automationpratice.component.controller.domain.Address;
-import com.automationpratice.component.controller.domain.Order;
-import com.automationpratice.component.controller.pages.CatergoryPurchase;
-import com.automationpratice.component.controller.pages.CreateAccont;
-import com.automationpratice.component.controller.pages.HomePage;
-import com.automationpratice.component.controller.pages.Purchase;
+import com.automationpratice.component.controller.model.Address;
+import com.automationpratice.component.controller.model.Order;
+import com.automationpratice.component.controller.pagination.CatergoryPurchase;
+import com.automationpratice.component.controller.pagination.CreateAccont;
+import com.automationpratice.component.controller.pagination.HomePage;
+import com.automationpratice.component.controller.pagination.Purchase;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

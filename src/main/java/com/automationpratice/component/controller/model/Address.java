@@ -1,4 +1,4 @@
-package com.automationpratice.component.controller.domain;
+package com.automationpratice.component.controller.model;
 
 public class Address {
 

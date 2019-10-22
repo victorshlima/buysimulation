@@ -1,18 +1,34 @@
-package com.automationpratice.component.controller.domain;
+package com.automationpratice.component.controller.model;
 
+
+import javax.persistence.*;
+
+import static javax.persistence.CascadeType.ALL;
+
+
+@Entity
+@Table(name = "ORDER")
 public class Order {
 
-
-
-private  String descricao;
-private double preço;
-private int quantidade;
-private double total;
-
-
+    @Column
+    @OneToOne(fetch = FetchType.EAGER, cascade = ALL, targetEntity = Address.class)
     Address DeliveryAddress;
-
+    @Column
+    @OneToOne(fetch = FetchType.EAGER, cascade = ALL, targetEntity = Address.class)
     Address BillingAAddress;
+    @Id
+    @GeneratedValue
+    @Column(name = "id_user_execution")
+    private int id;
+    @Column(name = "descricao")
+    private String descricao;
+    @Column(name = "preço")
+    private double preço;
+    @Column(name = "quantidade")
+    private int quantidade;
+    @Column(name = "total")
+    private double total;
+
 
     public Address getDeliveryAddress() {
         return DeliveryAddress;

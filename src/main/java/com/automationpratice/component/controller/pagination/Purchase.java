@@ -1,4 +1,4 @@
-package com.automationpratice.component.controller.pages;
+package com.automationpratice.component.controller.pagination;
 
 
 import org.openqa.selenium.By;
@@ -21,41 +21,11 @@ public class Purchase {
 
     public By PROCEED_CHECKOUT_2 = By.xpath("/html/body/div/div[2]/div/div[3]/div/p[2]/a[1]");
 
-    public By getPROCEED_CHECKOUT_2() {
-        return PROCEED_CHECKOUT_2;
-    }
+    public String ATT_PROCEED = "value";
+    public String ATT_NAME = "name";
+    public String ATT_SELECTED = "selected";
 
-    public By getITEM_PRICE() {
-        return ITEM_PRICE;
-    }
 
-    public By getITEM_QUANT() {
-        return ITEM_QUANT;
-    }
-
-    public By getITEM_SIZE() {
-        return ITEM_SIZE;
-    }
-
-    public By getITEM_COLOR() {
-        return ITEM_COLOR;
-    }
-
-    public By getSELECT_FIRST_ITEM_CART() {
-        return SELECT_FIRST_ITEM_CART;
-    }
-
-    public By getSELECT_FIRST_ITEM_CART_1() {
-        return SELECT_FIRST_ITEM_CART_1;
-    }
-
-    public By getPROCEED_CHECKOUT() {
-        return PROCEED_CHECKOUT;
-    }
-
-    public By getADD_FIRST_ITEM_CART() {
-        return ADD_FIRST_ITEM_CART;
-    }
 
 
 }

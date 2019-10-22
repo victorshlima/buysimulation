@@ -1,4 +1,4 @@
-package com.automationpratice.component.controller.pages;
+package com.automationpratice.component.controller.pagination;
 
 
 import org.openqa.selenium.By;

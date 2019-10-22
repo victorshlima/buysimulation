@@ -1,5 +1,5 @@
 import com.automationpratice.component.controller.WebDriverInstance.DriverInstance;
-import com.automationpratice.component.controller.pages.CatergoryPurchase;
+import com.automationpratice.component.controller.pagination.CatergoryPurchase;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,11 +17,11 @@ public class Main {
 
         DriverInstance driverInstance = new DriverInstance();
         WebDriver webDriver = driverInstance.buildANewDriver();
-        HomePage home = new HomePage();
+
         CatergoryPurchase catergoryPurchase = new CatergoryPurchase(webDriver);
 
         logger.info("Process begin");
-        home.HomePage(webDriver);
+
 
         catergoryPurchase.CatergoryPurchase(catergoryPurchase.getWoman());
 
