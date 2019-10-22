@@ -2,23 +2,19 @@ package com.automationpratice.component.controller.pages;
 
 
 import com.automationpratice.component.controller.WebDriverInstance.Util;
-import com.automationpratice.component.controller.domain.Pedido;
+import com.automationpratice.component.controller.domain.Order;
 import com.automationpratice.component.controller.enumeration.ByPath;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import java.util.Random;
 
-
-// fazer um for e selecionar por titulo
- //T-shirts
-
 public class CatergoryPurchase {
 
     ByPath x;
     WebDriver webDriver;
     Util util;
-    Pedido ped = new Pedido();
+    Order ped = new Order();
 
     public By woman = By.xpath("/html/body/div/div[1]/header/div[3]/div/div/div[6]/ul/li[1]/a");
     public By urlTshirts = By.xpath("/html/body/div/div[1]/header/div[3]/div/div/div[6]/ul/li[3]/a");
@@ -149,7 +145,7 @@ public class CatergoryPurchase {
     public CatergoryPurchase(WebDriver webDriver) {
 
         this.webDriver = webDriver;
-        this.util =   new Util(webDriver);
+        this.util = new Util(webDriver, 20);
     }
 
     public By getYOUR_DELIVERY_ADDRESS() {

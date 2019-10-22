@@ -19,9 +19,6 @@ public class DriverInstance {
     private final String pathOfChromeDriver = "D:\\development\\GitHubProjects\\dbserver\\purchase-simulation\\purchase-simulation\\src\\main\\resources\\drivers\\chrome\\chromedriver.exe";
 
 
-    public DriverInstance() {
-    }
-
     public static DriverInstance getInstance() {
         return new DriverInstance();
     }

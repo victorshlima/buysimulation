@@ -7,19 +7,12 @@ public class HomePage  {
 
     private final String urlToLogon = "http://automationpractice.com/index.php?";
 
+    public HomePage() {
 
+    }
 
-
-
-
-    public Boolean HomePage  (WebDriver wDriver
-                              ){
-
-
+    public Boolean HomePage(WebDriver wDriver) {
         wDriver.get(urlToLogon);
-
-
-
         return true;
     }
 
