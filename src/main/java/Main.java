@@ -1,6 +1,5 @@
 import com.automationpratice.component.controller.WebDriverInstance.DriverInstance;
 import com.automationpratice.component.controller.pages.CatergoryPurchase;
-import com.automationpratice.component.controller.pages.HomePage;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

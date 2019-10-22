@@ -5,7 +5,6 @@ import com.automationpratice.component.controller.WebDriverInstance.Utilv2;
 import com.automationpratice.component.controller.domain.Address;
 import com.automationpratice.component.controller.domain.Order;
 import com.automationpratice.component.controller.pages.CatergoryPurchase;
-import com.automationpratice.component.controller.pages.HomePage;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
