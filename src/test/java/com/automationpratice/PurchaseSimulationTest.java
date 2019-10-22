@@ -5,6 +5,9 @@ import com.automationpratice.component.controller.WebDriverInstance.Utilv2;
 import com.automationpratice.component.controller.domain.Address;
 import com.automationpratice.component.controller.domain.Order;
 import com.automationpratice.component.controller.pages.CatergoryPurchase;
+import com.automationpratice.component.controller.pages.CreateAccont;
+import com.automationpratice.component.controller.pages.HomePage;
+import com.automationpratice.component.controller.pages.Purchase;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,71 +29,57 @@ public class PurchaseSimulationTest {
         WebDriver webDriver = driverInstance.buildANewDriver();
         HomePage home = new HomePage();
 
+        Purchase purchase = new Purchase();
+        Utilv2 utilv2 = new Utilv2(webDriver, 30);
+        CreateAccont account = new CreateAccont();
+
         CatergoryPurchase catergoryPurchase = new CatergoryPurchase(webDriver);
 
-        logger.info("Process begin");
-        home.HomePage(webDriver);
-        Utilv2 utilv2 = new Utilv2(webDriver, 30);
+        utilv2.getURL(home.HOME);
+        utilv2.ClickByPath(home.WOMAN_MENU);
+        utilv2.ClickByPath(home.WOMAN_TSHIRTS);
 
-        utilv2.ClickByPath(catergoryPurchase.getWoman());
+        utilv2.ClickByPath(purchase.SELECT_FIRST_ITEM_CART);
+        utilv2.getTextElement(purchase.ITEM_PRICE);
+        utilv2.getAtribute(purchase.ITEM_QUANT, purchase.ATT_PROCEED);
+        utilv2.getAtribute(purchase.ITEM_COLOR, purchase.ATT_NAME);
+        utilv2.selecItemListBox(purchase.ITEM_SIZE, purchase.ATT_SELECTED);
+        utilv2.ClickByPath(purchase.ADD_FIRST_ITEM_CART);
+        utilv2.ClickByPath(purchase.PROCEED_CHECKOUT);
+        utilv2.ClickByPath(purchase.PROCEED_CHECKOUT_2);
 
-        utilv2.ClickByPath(catergoryPurchase.getUrlTshirts());
 
-        catergoryPurchase.AddItemCart(catergoryPurchase.getSELECT_FIRST_ITEM_CART());
+        utilv2.InsertValue(account.EMAIL_ADRESS, account.EMAIL_ADRESS_TEST);
+        utilv2.ClickByPath(account.CREATE_ACCOUNT);
+        utilv2.ClickByPath(account.UNIFORM_NEWSLETTER);
+        utilv2.ClickByPath(account.UNIFORM_OPTIN_OFFERS);
+        utilv2.ClickByPath(account.TITLE);
 
-        catergoryPurchase.validaItem(catergoryPurchase.getITEM_PRICE());
+        utilv2.InsertValue(account.CUSTUMER_FIRST_NAME, "John");
+        utilv2.InsertValue(account.CUSTUMER_LAST_NAME, "Lennon");
+        utilv2.InsertValue(account.PASSWORD, "A124@125");
 
-        catergoryPurchase.validaItem2(catergoryPurchase.getITEM_QUANT(), "value");
+        utilv2.InsertValue(account.COMPANY, "Company");
+        utilv2.InsertValue(account.ADDRESS, "Baker Street");
+        utilv2.InsertValue(account.ADDRESS_Line2, "221B");
+        utilv2.InsertValue(account.CITY, "Londres");
+        utilv2.InsertValue(account.OTHER, "Other");
 
-        catergoryPurchase.validaItem2(catergoryPurchase.getITEM_COLOR(), "name");
+        utilv2.InsertValue(account.POSTAL_CODE, "00000");
+        utilv2.InsertValue(account.PHONE, "(+55) 51 9999-22222");
+        utilv2.InsertValue(account.PHONE_MOBILE, "(+55) 51 9999-22222");
+        utilv2.selecItemListBox(account.STATE, "California");
+        utilv2.selecItemListBox(account.COUNTRY, "United States");
+        utilv2.selecItemListBox(account.DAY, "17");
+        utilv2.selecItemListBox(account.MONTH, "April");
+        utilv2.selecItemListBox(account.YEAR, "1990");
+        utilv2.ClickByPath(account.REGISTER);
+        utilv2.ClickByPath(account.CONFIRM_ADDRESS_PRO_CHECK);
+        utilv2.ClickByPath(account.CONFIRM);
+        utilv2.ClickByPath(account.SHIPPING_PRO_CHECK);
+        utilv2.ClickByPath(account.PAY_BUY_WIRE);
+        utilv2.ClickByPath(account.I_CONFIRM_ORDER);
 
-        catergoryPurchase.validaList(catergoryPurchase.getITEM_SIZE(), "selected");
-
-        catergoryPurchase.AddItemCart(catergoryPurchase.getADD_FIRST_ITEM_CART());
-
-        catergoryPurchase.AddItemCart(catergoryPurchase.getPROCEED_CHECKOUT());
-
-        utilv2.ClickByPath(catergoryPurchase.getPROCEED_CHECKOUT_2());
-
-        utilv2.InsertValue(catergoryPurchase.getEMAIL_ADRESS(), catergoryPurchase.getEMAIL_ADRESS_TEST());
-
-        utilv2.ClickByPath(catergoryPurchase.getCREATE_ACCOUNT());
-
-        utilv2.ClickByPath(catergoryPurchase.getUNIFORM_NEWSLETTER());
-        utilv2.ClickByPath(catergoryPurchase.getUNIFORM_OPTIN_OFFERS());
-
-        utilv2.ClickByPath(catergoryPurchase.getTITLE());
-
-        utilv2.InsertValue(catergoryPurchase.getCUSTUMER_FIRST_NAME(), "John");
-        utilv2.InsertValue(catergoryPurchase.getCUSTUMER_LAST_NAME(), "Lennon");
-        utilv2.InsertValue(catergoryPurchase.getPasswd(), "A124@125");
-
-        utilv2.InsertValue(catergoryPurchase.getCOMPANY(), "Company");
-        utilv2.InsertValue(catergoryPurchase.getADDRESS(), "Baker Street");
-        utilv2.InsertValue(catergoryPurchase.getADDRESS_Line2(), "221B");
-        utilv2.InsertValue(catergoryPurchase.getCITY(), "Londres");
-        utilv2.InsertValue(catergoryPurchase.getOTHER(), "Other");
-
-        utilv2.InsertValue(catergoryPurchase.getPOSTAL_CODE(), "00000");
-        utilv2.InsertValue(catergoryPurchase.getPHONE(), "(+55) 51 9999-22222");
-        utilv2.InsertValue(catergoryPurchase.getPHONE_MOBILE(), "(+55) 51 9999-22222");
-        utilv2.selecItemListBox(catergoryPurchase.getSTATE(), "California");
-        utilv2.selecItemListBox(catergoryPurchase.getCOUNTRY(), "United States");
-
-        utilv2.selecItemListBox(catergoryPurchase.getDAY(), "17");
-        utilv2.selecItemListBox(catergoryPurchase.getMONTH(), "April");
-        utilv2.selecItemListBox(catergoryPurchase.getYEAR(), "1990");
-
-        utilv2.ClickByPath(catergoryPurchase.getREGISTER());
-        utilv2.ClickByPath(catergoryPurchase.getCONFIRM_ADDRESS_PRO_CHECK());
-        utilv2.ClickByPath(catergoryPurchase.getCONFIRM());
-
-        utilv2.ClickByPath(catergoryPurchase.getSHIPPING_PRO_CHECK());
-
-        utilv2.ClickByPath(catergoryPurchase.getPAY_BUY_WIRE());
-
-        utilv2.ClickByPath(catergoryPurchase.getI_CONFIRM_ORDER());
-        logger.info("Process finish");
 
 
     }
