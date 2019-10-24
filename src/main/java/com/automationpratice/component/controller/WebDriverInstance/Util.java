@@ -1,5 +1,6 @@
 package com.automationpratice.component.controller.WebDriverInstance;
 
+import com.automationpratice.component.controller.exception.ElementNotFound;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,6 +11,8 @@ import java.util.List;
 
 public class Util {
 
+    List<WebElement> elements;
+    WebElement element;
     WebDriver webDriver;
     WebDriverWait wait;
     int timeOut;
@@ -20,100 +23,104 @@ public class Util {
         this.wait = new WebDriverWait(webDriver, timeOut);
     }
 
+    public WebElement elementPathValidate(By xpath) {
+        try {
+            wait.until(ExpectedConditions.presenceOfElementLocated(xpath));
+            return element = webDriver.findElement(xpath);
+        } catch (RuntimeException ex) {
+            throw new ElementNotFound("RuntimeException, element " + xpath.toString() + "timeout: " + timeOut);
+        }
+    }
 
-    public Boolean getURL(String url) {
+    public List<WebElement> elementsPathValidate(By xpath) {
+        try {
+            wait.until(ExpectedConditions.presenceOfElementLocated(xpath));
+            return webDriver.findElements(xpath);
+        } catch (RuntimeException ex) {
+            throw new RuntimeException("RuntimeException, element " + xpath.toString() + "timeout: " + timeOut);
+        }
+    }
+
+    public void getURL(String url) {
         try {
             webDriver.get(url);
-            return true;
-        } catch (Exception ex) {
+        } catch (RuntimeException ex) {
+            throw new RuntimeException("URL Not found" + url);
+        }
+    }
+
+    public void ClickByPath(By xpath) {
+        try {
+            element = elementPathValidate(xpath);
+            element.click();
+        } catch (RuntimeException ex) {
+            throw new RuntimeException("Error 500 - Internal server error confirmed  " + xpath);
+        }
+    }
+
+    public String getTextElement(By xpath) {
+        try {
+            element = elementPathValidate(xpath);
+            return element.getText();
+        } catch (RuntimeException ex) {
             throw new RuntimeException("Error 500 - Internal server error confirmed", ex);
         }
     }
 
-    public Boolean ClickByPath (By xpath){
+    public String getAtribute(By xpath, String atribute) {
         try {
-            wait.until(ExpectedConditions.presenceOfElementLocated(xpath));
-            WebElement Button = webDriver.findElement(xpath);
-            Button.click();
-            return true;
-        } catch (Exception ex) {
-            throw new RuntimeException ("Error 500 - Internal server error confirmed", ex);
+            element = elementPathValidate(xpath);
+            element = webDriver.findElement(xpath);
+            return element.getAttribute(atribute);
+        } catch (RuntimeException ex) {
+            throw new RuntimeException("Error 500 - Internal server error confirmed", ex);
         }
     }
 
-    public String getTextElements(By xpath, String atribute){
+    public void InsertValue(By xpath, String value) {
         try {
-            wait.until(ExpectedConditions.presenceOfElementLocated(xpath));
-           List< WebElement> elements = webDriver.findElements(xpath);
-          String  value="";
-            for (WebElement e:elements) {
-                try {
-                    if( e.getAttribute(atribute).equals("true")) {
-                        return e.getText();
-                    }
-                } catch  (Exception ex){
-                    ex.getMessage();
-                }
-            }
-            return value;
-        } catch (Exception ex) {
-            throw new RuntimeException ("Error 500 - Internal server error confirmed", ex);
+            element = elementPathValidate(xpath);
+            element = webDriver.findElement(xpath);
+            element.sendKeys(value);
+        } catch (RuntimeException ex) {
+            throw new RuntimeException("Error 500 - Internal server error confirmed", ex);
         }
     }
 
-
-    public Boolean selecItemListBox(By xpath, String value){
+    public void selecItemListBox(By xpath, String value) {
         try {
-            wait.until(ExpectedConditions.presenceOfElementLocated(xpath));
-            List< WebElement> elements = webDriver.findElements(xpath);
-            for (WebElement e:elements) {
+            elements = elementsPathValidate(xpath);
+            elements = webDriver.findElements(xpath);
+            for (WebElement e : elements) {
                 try {
                     if (e.getText().trim().equals(value)) {
                         e.click();
-                        return true;
                     }
-                } catch  (Exception ex){
+                } catch (RuntimeException ex) {
                     ex.getMessage();
                 }
             }
-            return false;
-        } catch (Exception ex) {
-            throw new RuntimeException ("Error 500 - Internal server error confirmed", ex);
+        } catch (RuntimeException ex) {
+            throw new RuntimeException("Error 500 - Internal server error confirmed", ex);
         }
     }
 
 
-    public String getTextElement(By xpath){
-        try {
-            wait.until(ExpectedConditions.presenceOfElementLocated(xpath));
-            WebElement element = webDriver.findElement(xpath);
-            return  element.getText();
-        } catch (Exception ex) {
-            throw new RuntimeException ("Error 500 - Internal server error confirmed", ex);
-        }
-    }
-
-    public String getAtribute(By xpath, String atribute){
-        try {
-            wait.until(ExpectedConditions.presenceOfElementLocated(xpath));
-            WebElement element = webDriver.findElement(xpath);
-            return  element.getAttribute(atribute);
-        } catch (Exception ex) {
-            throw new RuntimeException ("Error 500 - Internal server error confirmed", ex);
-        }
-    }
-
-    public Boolean InsertValue(By xpath, String value){
-        try {
-            wait.until(ExpectedConditions.presenceOfElementLocated(xpath));
-            WebElement element = webDriver.findElement(xpath);
-            element.sendKeys(value);
-            return  true;
-        } catch (Exception ex) {
-            throw new RuntimeException ("Error 500 - Internal server error confirmed", ex);
-        }
-
-    }
+//    public String getTextElements(By xpath, String atribute) {
+//        elements = elementsPathValidate(xpath);
+//        elements = webDriver.findElements(xpath);
+//        for (WebElement e : elements) {
+//            try {
+//                if (e.getAttribute(atribute).equals("true")) {
+//                    return e.getText();
+//                }
+//            } catch (Exception ex) {
+//
+//            }
+//
+//        }
+//        throw new RuntimeException("Error 500 - Internal server error confirmed");
+//    }
 
 
 }

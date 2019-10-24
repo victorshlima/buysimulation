@@ -1,86 +1,127 @@
 package com.automationpratice;
 
 import com.automationpratice.component.controller.WebDriverInstance.DriverInstance;
-import com.automationpratice.component.controller.WebDriverInstance.Utilv2;
+import com.automationpratice.component.controller.WebDriverInstance.Util;
 import com.automationpratice.component.controller.model.Address;
 import com.automationpratice.component.controller.model.Order;
-import com.automationpratice.component.controller.pagination.CatergoryPurchase;
 import com.automationpratice.component.controller.pagination.CreateAccont;
 import com.automationpratice.component.controller.pagination.HomePage;
 import com.automationpratice.component.controller.pagination.Purchase;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import resources.Users;
 
 
 public class PurchaseSimulationTest {
 
-
     private static final Logger logger = LoggerFactory.getLogger(PurchaseSimulationTest.class);
 
+    private static Users user;
+    private static DriverInstance driverInstance = new DriverInstance();
+    private static WebDriver webDriver = driverInstance.buildANewDriver();
+    private static HomePage home = new HomePage();
+    private static Purchase purchase = new Purchase();
+    private static Util uDriver = new Util(webDriver, 30);
+    private static CreateAccont account = new CreateAccont();
+    private Order order;
+    private Address adress1;
+    private Address adress2;
+
+    public PurchaseSimulationTest(Users user) {
+
+        PurchaseSimulationTest.user = user.Woman0001();
+        this.order = new Order();
+
+        this.adress1 = new Address();
+        this.adress1.setAddress(user.getAddress());
+        this.adress1.setAddressLine2(user.getAddressLine2());
+        this.adress1.setCity(user.getCity());
+        this.adress1.setCompany(user.getCompany());
+        this.adress1.setCustomer_firstname(user.getCustumerFirstName());
+        this.adress1.setCustomer_lastname(user.getCustumerLastName());
+
+        this.adress2 = new Address();
+        this.adress2.setAddress(user.getAddress());
+        this.adress2.setAddressLine2(user.getAddressLine2());
+        this.adress2.setCity(user.getCity());
+        this.adress2.setCompany(user.getCompany());
+        this.adress2.setCustomer_firstname(user.getCustumerFirstName());
+        this.adress2.setCustomer_lastname(user.getCustumerLastName());
+    }
 
     public static void main(String[] args) {
 
-        Order order = new Order();
-        Address adress1 = new Address();
-        Address adress2 = new Address();
+        new PurchaseSimulationTest(new Users().Woman0001());
 
-        DriverInstance driverInstance = new DriverInstance();
-        WebDriver webDriver = driverInstance.buildANewDriver();
-        HomePage home = new HomePage();
+        IniPurchase();
+        GetInfoItem();
+        AddToCart();
+        SignUp();
+        FiningPurchase();
 
-        Purchase purchase = new Purchase();
-        Utilv2 utilv2 = new Utilv2(webDriver, 30);
-        CreateAccont account = new CreateAccont();
+    }
 
-        CatergoryPurchase catergoryPurchase = new CatergoryPurchase(webDriver);
+    public static void IniPurchase() {
 
-        utilv2.getURL(home.HOME);
-        utilv2.ClickByPath(home.WOMAN_MENU);
-        utilv2.ClickByPath(home.WOMAN_TSHIRTS);
+        uDriver.getURL(home.HOME);
+        uDriver.ClickByPath(home.WOMAN_MENU);
+        uDriver.ClickByPath(home.WOMAN_TSHIRTS);
+        uDriver.ClickByPath(purchase.SELECT_FIRST_ITEM_CART);
 
-        utilv2.ClickByPath(purchase.SELECT_FIRST_ITEM_CART);
-        utilv2.getTextElement(purchase.ITEM_PRICE);
-        utilv2.getAtribute(purchase.ITEM_QUANT, purchase.ATT_PROCEED);
-        utilv2.getAtribute(purchase.ITEM_COLOR, purchase.ATT_NAME);
-        utilv2.selecItemListBox(purchase.ITEM_SIZE, purchase.ATT_SELECTED);
-        utilv2.ClickByPath(purchase.ADD_FIRST_ITEM_CART);
-        utilv2.ClickByPath(purchase.PROCEED_CHECKOUT);
-        utilv2.ClickByPath(purchase.PROCEED_CHECKOUT_2);
+    }
 
+    public static void GetInfoItem() {
 
-        utilv2.InsertValue(account.EMAIL_ADRESS, account.EMAIL_ADRESS_TEST);
-        utilv2.ClickByPath(account.CREATE_ACCOUNT);
-        utilv2.ClickByPath(account.UNIFORM_NEWSLETTER);
-        utilv2.ClickByPath(account.UNIFORM_OPTIN_OFFERS);
-        utilv2.ClickByPath(account.TITLE);
+        uDriver.getTextElement(purchase.ITEM_PRICE);
+        uDriver.getAtribute(purchase.ITEM_QUANT, purchase.ATT_PROCEED);
+        uDriver.getAtribute(purchase.ITEM_COLOR, purchase.ATT_NAME);
+        uDriver.selecItemListBox(purchase.ITEM_SIZE, purchase.ATT_SELECTED);
 
-        utilv2.InsertValue(account.CUSTUMER_FIRST_NAME, "John");
-        utilv2.InsertValue(account.CUSTUMER_LAST_NAME, "Lennon");
-        utilv2.InsertValue(account.PASSWORD, "A124@125");
+    }
 
-        utilv2.InsertValue(account.COMPANY, "Company");
-        utilv2.InsertValue(account.ADDRESS, "Baker Street");
-        utilv2.InsertValue(account.ADDRESS_Line2, "221B");
-        utilv2.InsertValue(account.CITY, "Londres");
-        utilv2.InsertValue(account.OTHER, "Other");
+    public static void AddToCart() {
 
-        utilv2.InsertValue(account.POSTAL_CODE, "00000");
-        utilv2.InsertValue(account.PHONE, "(+55) 51 9999-22222");
-        utilv2.InsertValue(account.PHONE_MOBILE, "(+55) 51 9999-22222");
-        utilv2.selecItemListBox(account.STATE, "California");
-        utilv2.selecItemListBox(account.COUNTRY, "United States");
-        utilv2.selecItemListBox(account.DAY, "17");
-        utilv2.selecItemListBox(account.MONTH, "April");
-        utilv2.selecItemListBox(account.YEAR, "1990");
-        utilv2.ClickByPath(account.REGISTER);
-        utilv2.ClickByPath(account.CONFIRM_ADDRESS_PRO_CHECK);
-        utilv2.ClickByPath(account.CONFIRM);
-        utilv2.ClickByPath(account.SHIPPING_PRO_CHECK);
-        utilv2.ClickByPath(account.PAY_BUY_WIRE);
-        utilv2.ClickByPath(account.I_CONFIRM_ORDER);
+        uDriver.ClickByPath(purchase.ADD_FIRST_ITEM_CART);
+        uDriver.ClickByPath(purchase.PROCEED_CHECKOUT);
+        uDriver.ClickByPath(purchase.PROCEED_CHECKOUT_2);
 
+    }
 
+    public static void SignUp() {
+
+        uDriver.InsertValue(account.EMAIL_ADRESS, account.EMAIL_ADRESS_TEST);
+        uDriver.ClickByPath(account.CREATE_ACCOUNT);
+        uDriver.ClickByPath(account.UNIFORM_NEWSLETTER);
+        uDriver.ClickByPath(account.UNIFORM_OPTIN_OFFERS);
+        uDriver.ClickByPath(account.TITLE);
+        uDriver.InsertValue(account.CUSTUMER_FIRST_NAME, user.getCustumerFirstName());
+        uDriver.InsertValue(account.CUSTUMER_LAST_NAME, user.getCustumerLastName());
+        uDriver.InsertValue(account.PASSWORD, user.getPasswd());
+        uDriver.InsertValue(account.COMPANY, user.getCompany());
+        uDriver.InsertValue(account.ADDRESS, user.getAddress());
+        uDriver.InsertValue(account.ADDRESS_Line2, user.getAddressLine2());
+        uDriver.InsertValue(account.CITY, user.getCity());
+        uDriver.InsertValue(account.OTHER, user.getOther());
+        uDriver.InsertValue(account.POSTAL_CODE, user.getPostal_code());
+        uDriver.InsertValue(account.PHONE, user.getPhone());
+        uDriver.InsertValue(account.PHONE_MOBILE, user.getPhoneMobile());
+        uDriver.selecItemListBox(account.STATE, user.getState());
+        uDriver.selecItemListBox(account.COUNTRY, user.getCountry());
+        uDriver.selecItemListBox(account.DAY, user.getDay());
+        uDriver.selecItemListBox(account.MONTH, user.getMonth());
+        uDriver.selecItemListBox(account.YEAR, user.getYear());
+
+    }
+
+    public static void FiningPurchase() {
+
+        uDriver.ClickByPath(account.REGISTER);
+        uDriver.ClickByPath(account.CONFIRM_ADDRESS_PRO_CHECK);
+        uDriver.ClickByPath(account.CONFIRM);
+        uDriver.ClickByPath(account.SHIPPING_PRO_CHECK);
+        uDriver.ClickByPath(account.PAY_BUY_WIRE);
+        uDriver.ClickByPath(account.I_CONFIRM_ORDER);
 
     }
 }
